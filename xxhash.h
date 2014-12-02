@@ -85,9 +85,6 @@ unsigned int       XXH32 (const void* input, size_t length, unsigned seed);
 unsigned long long XXH64 (const void* input, size_t length, unsigned long long seed);
 void 			   XXH128 (const void* input, size_t length, unsigned long long seed, void* out);
 void 			   XXH256 (const void* input, size_t length, unsigned long long seed, void* out);
-#ifdef __SSE4_2__
-void 			   XXH256_sse (const void* input, size_t length, unsigned long long seed, void* out);
-#endif
 
 /*
 XXH32() :
@@ -151,16 +148,11 @@ unsigned long long XXH64_digest (const XXH64_state_t* statePtr);
 
 XXH_errorcode      XXH128_reset  (XXH128_state_t* statePtr, unsigned long long seed);
 XXH_errorcode      XXH128_update (XXH128_state_t* statePtr, const void* input, size_t length);
-void 	   		   XXH128_digest (const XXH128_state_t* statePtr, void* out);
+void               XXH128_digest (const XXH128_state_t* statePtr, void* out);
 
 XXH_errorcode      XXH256_reset  (XXH256_state_t* statePtr, unsigned long long seed);
 XXH_errorcode      XXH256_update (XXH256_state_t* statePtr, const void* input, size_t length);
-void 	   		   XXH256_digest (const XXH256_state_t* statePtr, void* out);
-#ifdef __SSE4_2__
-XXH_errorcode      XXH256_sse_reset  (XXH256_state_t* statePtr, unsigned long long seed);
-XXH_errorcode      XXH256_sse_update (XXH256_state_t* statePtr, const void* input, size_t length);
-void 	   		   XXH256_sse_digest (const XXH256_state_t* statePtr, void* out);
-#endif
+void               XXH256_digest (const XXH256_state_t* statePtr, void* out);
 
 /*
 These functions calculate the xxHash of an input provided in multiple smaller packets,
